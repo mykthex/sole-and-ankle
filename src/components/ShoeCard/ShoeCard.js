@@ -31,11 +31,30 @@ const ShoeCard = ({
       ? 'new-release'
       : 'default'
 
+  const variantsData = {
+    'on-sale': {
+      color: COLORS.primary,
+      label: 'On sale',
+    },
+    'new-release': {
+      color: COLORS.secondary,
+      label: 'New Release',
+    },
+  }
+
   return (
     <Link href={`/shoe/${slug}`}>
       <Wrapper>
         <ImageWrapper>
           <Image alt="" src={imageSrc} />
+          {variant !== 'default' && (
+            <ImageTag
+              className="tag"
+              bgColor={variantsData[variant]?.color}
+            >
+              {variantsData[variant]?.label}
+            </ImageTag>
+          )}
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
@@ -53,18 +72,47 @@ const ShoeCard = ({
 const Link = styled.a`
   text-decoration: none;
   color: inherit;
+  margin: 20px 0;
+  flex-basis: 100%;
+
+  @media only screen and (min-width: 700px) {
+    flex-basis: calc(50% - 40px);
+    margin: 20px;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    flex-basis: calc(33.33% - 40px);
+  }
 `;
 
-const Wrapper = styled.article``;
+const Wrapper = styled.article`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ImageTag = styled.span`
+  padding: 15px;
+  border-radius: 10px;
+  color: #fff;
+  position: absolute;
+  right: -10px;
+  top: 10px;
+  background-color: ${props => props.bgColor};
+`;
 
 const ImageWrapper = styled.div`
   position: relative;
 `;
 
-const Image = styled.img``;
+const Image = styled.img`
+  width: 100%;
+  border-radius: 16px 16px 4px 4px;
+`;
 
 const Row = styled.div`
   font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Name = styled.h3`

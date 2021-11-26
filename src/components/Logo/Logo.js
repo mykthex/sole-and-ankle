@@ -14,6 +14,14 @@ const Logo = (props) => {
 const Link = styled.a`
   text-decoration: none;
   color: inherit;
+
+  @media only screen and (min-width: 1000px) {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    padding: 20px 32px;
+    transform: translateY(-50%);
+  }
 `;
 
 const Wrapper = styled.h1`
